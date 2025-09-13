@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: BitShield-service
+spec:
+  selector:
+    app: BitShield
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8000 # IMPORTANTE: O Service aponta para a porta do WAF!

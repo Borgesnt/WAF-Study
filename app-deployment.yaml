@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: BitShield
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: BitShield
+  template:
+    metadata:
+      labels:
+        app: BitShield
+    spec:
+      containers:
+      # Container 1: O WAF
+      - name: BitShield-sidecar
+        image: seu-docker-username/meu-waf-proxy:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000 # O WAF escuta nesta porta
+      
+      # Container 2: A sua aplicação (ex: um servidor web simples)
+      - name: minha-aplicacao
+        image: traefik/whoami # Imagem de exemplo
+        ports:
+        - containerPort: 80 # A aplicação real escuta nesta porta
