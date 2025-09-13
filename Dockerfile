@@ -3,7 +3,7 @@ FROM golang:1.20-alpine AS builder
 WORKDIR /app
 
 # Copia apenas os arquivos de mod primeiro para caching
-COPY go.mod go.sum ./
+COPY go.mod ./
 RUN go mod download
 
 # Copia o resto do código
